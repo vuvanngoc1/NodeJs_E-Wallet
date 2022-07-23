@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/homepage/style.css">
+    <link rel="stylesheet" href="css/homepage/skins/color-1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  
+    <link rel="stylesheet" href="css/homepage/skins/color-1.css" class="alternate-style" title="color-1" 
+    disabled>
+    <link rel="stylesheet" href="css/homepage/skins/color-2.css" class="alternate-style" title="color-2" 
+    disabled>
+    <link rel="stylesheet" href="css/homepage/skins/color-3.css" class="alternate-style" title="color-3" 
+    disabled>
+    <link rel="stylesheet" href="css/homepage/skins/color-4.css" class="alternate-style" title="color-4" 
+    disabled>
+    <link rel="stylesheet" href="css/homepage/skins/color-5.css" class="alternate-style" title="color-5" 
+    disabled>
+    <link rel="stylesheet" href="css/homepage/style-switcher.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<%
+    let UserInfor = {};
+    if(dataUser){
+        UserInfor = dataUser;
+    }
+%>
+<body class="dark">
+    <input class="d-none" type="text" id="bl" value="<%= UserInfor.balance %>">
+    <input class="d-none" id="usernameOfThisAccount" type="text" value="<%= UserInfor.username %>">
+    <input class="d-none" id="passwordOfThisAccount" type="text" value="<%= UserInfor.password %>">
+
+    <!--Main Container Start-->
+    <div class="main-container">
+        <!--Aside Start-->
+        <div class="aside">
+            <div class="logo">
+                <a href="#"><span>E</span>-wallet</a>
+            </div>
+            <div class="nav-toggler">
+                <span></span>
+            </div>
+            <ul class="nav">
+                <li><a href="#home" class="active"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="#about"><i class="fa fa-user"></i>Infomation</a></li>
+                <li><a class="menuItem" href="#payment"><i class="fa fa-credit-card"></i>Payment</a></li>
+                <li><a class="menuItem" href="#transfer"><i class="fa fa-money-bill-trend-up"></i>Transfer money</a></li>
+                <li><a class="menuItem" href="#load"><i class="fa fa-wallet"></i>Loading money</a></li>
+                <li><a class="menuItem" href="#with"><i class="fa fa-arrow-right-to-city"></i>Withdraw</a></li>
+                <li><a class="menuItem" href="#trans"><i class="fa fa-history"></i>Transaction history</a></li>
+                <li>
+                    <form action="" method="post">
+                        <input class="d-none" name="logOut" type="text" value="true">
+                        <button style="border:none;background:none; margin-left: 20px;font-size: 1.2rem;width: 100%;text-align: center;color: var(--skin-color)" type="submit">
+                            <i class="fa fa-sign-out-alt"></i> Log out</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+    <!--Aside End-->
+    <!--Main Content Start-->
+    <div class="main-content">
+        <section class="home section" id="home">
+            <div class="container">
+                <div class="row">
+                    <div class="home-info padd-15">
+                        <h3 class="hello">Hello:  <span id="fullname" class="name"><%= UserInfor.fullname %></span></h3>
+                        <h3 class="my-profession">Welcome to our service : <span class="typing">Transfer Money</span></h3>
+                        <p>Let me know if you need any help!</p>
+                        <a href="#contact" class="btnHomePage hire-me">Hire me</a>
+                    </div>
+                    <div class="home-img padd-15">
+                        <img src="https://png.pngtree.com/png-vector/20191116/ourlarge/pngtree-businessman-avatar-icon-vector-download-vector-user-icon-avatar-silhouette-social-png-image_1991050.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about section" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="section-title padd-15">
+                        <h2>Infomation</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="about-content padd-15">
+                        <div class="row">
+                            <div class="about-text padd-15">
+                                <h3>Customer: <span><%= UserInfor.fullname %></span></h3>
+                                <p>Infomation for user</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="personal-info padd-15">
+                                <div class="row">
+                                    <div class="info-item padd-15">
+                                        <p>Name: <span><%= UserInfor.fullname %></span></p>
+                                    </div>
+                                    <div class="info-item padd-15">
+                                        <p>Mobile Phone: <span><%= UserInfor.phone %></span></p>
+                                    </div>
+                                    <div class="info-item padd-15">
+                                        <p>Your Email: <span id="emailUser"><%= UserInfor.email %></span></p>
+                                    </div>
+                                    <div class="info-item padd-15">
+                                        <p>Your Birthday: <span><%= UserInfor.birthday %></span></p>
+                                    </div>
+                                    <div class="info-item padd-15">
+                                        <p>Address: <span><%= UserInfor.address %></span></p>
+                                    </div>
+                                    <div class="info-item padd-15">
+                                        <p>Balance: <span id="balance"><%= balanceInAlph %> đ</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skills padd-15">
+                                <div class="row">
+                                        <div class="info-item padd-15">
+                                            <h3 id="StatusInfor">Status: <%= UserInfor.status %></h3> 
+                                        </div>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="changePassForm"  style="display:flex;justify-content: flex-end;flex-direction: column;">
+                        
+                    </div>
+
+                    <button id="openChangePassFormBtn" style="width: 200px;padding: 5px 10px;border-radius: 8px;cursor:pointer;margin-top: 15px;">
+                        Change Password
+                    </button>
+                    <button id="openForgotPassFormBtn" style="width: 200px;padding: 5px 10px;border-radius: 8px;cursor:pointer;margin-top: 15px;">
+                        <a style="text-decoration: none;text-transform:none;color:black" href="/forgot_password">Forgot Password</a>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="service section itemContent" id="trans">
+            <div class="container">
+                <div class="row">
+                    <div class="section-title padd-15">
+                        <h2>Transaction history</h2>
+                    </div>
+                </div>
+                <form method="post" action="/history">
+                    <div class="row">
+                        <label for="allHis" class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-university"></i>
+                                </div>
+                                <h4>All history transaction</h4>
+                            </div>
+                        </label>
+                        <label for="loadingHis" class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-wallet"></i>
+                                </div>
+                                <h4>Loading money</h4>
+                            </div>
+                        </label>
+                        <label for="transferHis" class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-money-bill-trend-up"></i>
+                                </div>
+                                <h4>Transfer money</h4>
+                            </div>
+                        </label>
+                        <label for="withdrawHis" class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-arrow-right-to-city"></i>
+                                </div>
+                                <h4>Withdraw</h4>
+                            </div>
+                        </label>
+                        <label for="paymentHis" class="service-item padd-15">
+                            <div class="service-item-inner">
+                                <div class="icon">
+                                    <i class="fa fa-credit-card"></i>
+                                </div>
+                                <h4>Payment</h4>
+                            </div>
+                        </label>
+                        <input class="d-none" type="text" name="username" value="<%= UserInfor.username %>">
+                        <input class="d-none" type="text" name="password" value="<%= UserInfor.password %>">
+                        <input class="d-none" value="allHis" id="allHis" name="typeHis" type="submit">
+                        <input class="d-none" value="loading" id="loadingHis" name="typeHis" type="submit">
+                        <input class="d-none" value="transfer" id="transferHis" name="typeHis" type="submit">
+                        <input class="d-none" value="withdraw" id="withdrawHis" name="typeHis" type="submit">
+                        <input class="d-none" value="payment" id="paymentHis" name="typeHis" type="submit">
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="portfolio section itemContent" id="payment">
+            <div class="container">
+                <div class="row">
+                    <div class="section-title padd-15">
+                        <h2>Payment</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="portfolio-heading padd-15">
+                        <h2>Payment cards :</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="portfolio-item padd-15">
+                        <div class="portfolio-item-inner shadow-dark">
+                            <div class="portfolio-img">
+                                <img id="mobileCard" style="cursor:pointer" src="img/mobile.jpeg">
+                            </div>
+                        </div>
+                    </div>
+                
+            
+                    <div class="portfolio-item padd-15">
+                        <div class="portfolio-item-inner shadow-dark">
+                            <div class="portfolio-img">
+                                <img id="vinaCard" style="cursor:pointer" src="img/vina.jpeg">
+                            </div>
+                        </div>
+                    </div>
+
+               
+                    <div class="portfolio-item padd-15">
+                        <div class="portfolio-item-inner shadow-dark">
+                            <div class="portfolio-img">
+                                <img id="viettelCard" style="cursor:pointer" src="img/viettel1.jpeg">
+                            </div>
+                        </div>
+                    </div>
+               
+            </div>
+        </section>
+
+        <section style="padding-top: 50px;" class="contact section itemContent" id="transfer">
+            <div class="cotainer">
+                <div class="row">
+                    <div class="section-title padd-15">
+                        <h2>Transfer money</h2>
+                    </div>
+                </div>
+                <h3 class="contact-title">Do you want to be poor?</h3>
+                <h4 class="contact-sub-title">WELCOME TO OUR MONEY TRANSFER SERVICE</h4>
+                <div class="row">
+                    <div class="contact-form padd-15">
+                        <div class="row">
+                            <div class="form-item col-6 padd-15">
+                                <div class="form-group">
+                                    <input id="phoneTransaction" type="text" class="form-control" placeholder="Phone number">
+                                </div>
+                            </div>
+                            <div class="form-item col-6 padd-15">
+                                <div class="form-group">
+                                    <div style="padding:14px;color:var(--skin-color);" id="receiver"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <input id="moneyTransaction" type="text" class="form-control" placeholder="Money">
+                                    <input class="form-control" type="text" id="formatMoneyTransfer" value="The amount: 0 đ">
+                                    <input class="form-control" type="text" id="formatFeeTransfer" value="Transaction fee: 0 đ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <div style="color:var(--skin-color);padding-left: 10px;">Fee bearer: </div>
+                                    <input style="margin-left: 10px;" id="sendPer" name="feeBearer" type="radio" ><b style="color:var(--skin-color);"> Sender</b>
+                                    <input style="margin-left: 20px; "id="receivePer" name="feeBearer" type="radio"><b style="color:var(--skin-color);"> Receiver</b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <textarea id="msgTransaction" type="text" class="form-control" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%;text-align: center;" class='text-danger' id="transactionError"></div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                               <button id="btnTransaction" type="submit" class="btnHomePage"> Send </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding-top: 50px;" class="contact section itemContent" id="load">
+            <div class="cotainer">
+                <div class="row">
+                    <div class="section-title padd-15">
+                        <h2>Loading Money</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="contact-form padd-15">
+                        <div class="row">
+                            <div class="form-item col-6 padd-15">
+                                <div class="form-group">
+                                    <input id="cardNumber" type="text" class="form-control" placeholder="Card number">
+                                </div>
+                            </div>
+                            <div class="form-item col-6 padd-15">
+                                <div class="form-group">
+                                    <input id="expiry" type="date" class="form-control" placeholder="Expiry">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <input id="CVVCode" type="text" class="form-control" placeholder="CVV code">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <input id="moneyRecharge" type="text" class="form-control" placeholder="Enter the amount of money you want to recharge">
+                                    <input class="form-control" type="text" id="formatMoney" value="The amount: 0 đ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <div id="errorMsgLoadingMoney" style="color:red;width: 100%;text-align: center;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                               <button id="rechargeMoneyBtn" type="button" class="btnHomePage"> Recharge </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Withdraw -->
+        <section style="padding-top: 50px;" class="contact section itemContent" id="with">
+            <div class="cotainer">
+                <div class="row">
+                    <div class="section-title padd-15">
+                        <h2>Withdraw Money</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="contact-form padd-15">
+                        <div class="row">
+                            <div class="form-item col-6 padd-15">
+                                <div class="form-group">
+                                    <input id="withDrawCardnumber" name="cardnumber" type="text" class="form-control" placeholder="Card number">
+                                </div>
+                            </div>
+                            <div class="form-item col-6 padd-15">
+                                <div class="form-group">
+                                    <input id="withDrawExpiry" name="expiry" type="date" class="form-control" placeholder="Expiry">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <input id="withDrawCvvcode" name="cvvcode" type="text" class="form-control" placeholder="CVV code">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <input id="withDrawAmount" name="moneyWithdraw" type="text" class="form-control" placeholder="The amount of money">
+                                    <input class="form-control" type="text" id="formatMoneyWithDraw" value="The amount: 0 đ">
+                                    <input class="form-control" type="text" id="formatFeeWithDraw" value="Transaction fee: 0 đ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                                <div class="form-group">
+                                    <textarea id="withDrawNote" name="note" type="text" class="form-control" placeholder="Note"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="withDrawError" style="text-align:center;" class="form-item col-12 padd-15 text-danger">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-item col-12 padd-15">
+                               <button id="withDrawBtn" type="button" class="btnHomePage"> Send </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+    </div>
+
+
+        </div>
+    </div>
+    <div class="style-switcher">
+        <div class="style-switcher-toggler s-icon">
+            <i class="fas fa-cog fa-spin"></i>
+        </div>
+        <div class="day-night s-icon">
+            <i class="fas "></i>
+        </div>
+        <h4>Theme Colors</h4>
+        <div class="colors">
+            <span class="color-1" onclick="setActiveStyle('color-1')"></span>
+            <span class="color-2" onclick="setActiveStyle('color-2')"></span>
+            <span class="color-3" onclick="setActiveStyle('color-3')"></span>
+            <span class="color-4" onclick="setActiveStyle('color-4')"></span>
+            <span class="color-5" onclick="setActiveStyle('color-5')"></span>
+
+        </div>
+    </div>
+
+    <!-- //dialogForRequieVeriety -->
+    <div id="modalRequireVeriety" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">REQUIRE VERIFICATION</h5>
+                <button style="padding:5px 10px;" type="button" class="close closeRequireVertical" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="verticalModalContent"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="addIDCard" type="button" class="btn btn-primary ">Add ID Card</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- //dialogForRequieVerietyIDCARD -->
+    <div id="modalRequireVerietyIDCard" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add ID Card</h5> 
+                    <button style="padding:5px 10px;" type="button" class="close closeIDCardModal" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="addIDCardModalContent">
+                        <p>Add your ID Card Picture</p>
+                        <div class="IDCardBox">
+                            <label for="frontCard" class="IDCardBox__item hoverLabel">
+                                <img class="frontCard d-none" src="" alt="">
+                            </label>
+                            <label for="backCard" class="IDCardBox__item hoverLabel">
+                                <img class="backCard d-none" src="" alt="">
+                            </label>
+
+                            <input type="file" class="d-none" id="frontCard">
+                            <input type="file" class="d-none" id="backCard">
+
+                            <input type="text" class="checkSend d-none" value="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveIDCard" type="button" class="btn btn-primary ">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- dialog recharge success -->
+    <div id="rechargeSuccessModal__control">
+        <div class="modal fade" id="rechargeSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Success recharge</h5>
+                <button type="button" style="padding:5px 10px;" class="close" data-dismiss="modal" aria-label="Close" id="closeRechargeModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                Success to recharge money !!
+                </div>
+                <div class="modal-footer">
+                    <form action="http://localhost:8080/resetPageHome" method="POST">
+                        <input name="username" class="d-none" type="text" value="<%= UserInfor.username %>">
+                        <input name="password" class="d-none" type="text" value="<%= UserInfor.password %>">
+                        <button type="submit" id="confirmRechargeDialog" class="btn btn-primary">OK</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+        <button class="d-none" id="openRechargeDialog"></button>
+    </div>
+
+    <!-- dialog withdraw success -->
+    <div id="withdrawSuccessModal__control">
+        <div class="modal fade" id="withdrawSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Withdrawal status</h5>
+                <button type="button" style="padding:5px 10px;" class="close" data-dismiss="modal" aria-label="Close" id="closeWithdrawModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div id="withdrawSuccessModal__inner" class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <form action="http://localhost:8080/resetPageHome" method="POST">
+                        <input name="username" class="d-none" type="text" value="<%= UserInfor.username %>">
+                        <input name="password" class="d-none" type="text" value="<%= UserInfor.password %>">
+                        <button type="submit" id="confirmRechargeDialog" class="btn btn-primary">OK</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+        <button class="d-none" id="openWithdrawDialog"></button>
+    </div>
+
+    <!-- get OTP dialog -->
+    <div id="getOTPModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">OTP authentication</h5>
+              <button style="padding: 5px 10px" id="closeOTPModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div style="width: 100%;text-align: center;">Check your email to get OTP code</div>
+                <input id="OTPTransfer" type="text" class="form-control" placeholder="Enter OTP">
+                <div class="text-danger" style="width: 100%;text-align: center;">Time Remaining:<b id="TimeRemaingOTP">60</b></div>
+            </div>
+            <div class="text-danger" id="OTPError" style="width: 100%;text-align: center;"></div>
+            <div class="modal-footer">
+              <button id="sendOTP" type="button" class="btn btn-primary">Continue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="d-none" data-toggle="modal" data-target="#getOTPModal" id="openOTPDialog"></button>
+
+    <!-- dialog success transfer -->
+    <div class="modal fade" id="transferSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Transfer status</h5>
+            <button style="padding: 5px 10px;" type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeTransferModal">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div id="transferSuccessModal__inner" class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <form action="http://localhost:8080/resetPageHome" method="POST">
+                    <input name="username" class="d-none" type="text" value="<%= UserInfor.username %>">
+                    <input name="password" class="d-none" type="text" value="<%= UserInfor.password %>">
+                    <button type="submit" id="confirmRechargeDialog" class="btn btn-primary">OK</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <button class="d-none" id="openTransferSuccessDialog"></button>
+
+    <!--JS files-->
+    <script>
+        $(window).on('load', function(){
+            $('.menuItem').on('click', function(){
+                if($('.verticalModalContent').text() != ''){
+                    $('#modalRequireVeriety').modal('show');
+                }
+            })
+
+            $('.closeRequireVertical').on('click',()=>{
+                $('#modalRequireVeriety').modal('hide');
+            })
+
+            $('#addIDCard').on('click',()=>{
+                $('#modalRequireVeriety').modal('hide');
+                $('#modalRequireVerietyIDCard').modal('show');
+            })
+
+            $('.closeIDCardModal').on('click',()=>{
+                $('#modalRequireVerietyIDCard').modal('hide');
+                $('.frontCard').attr('src','');
+                $('.backCard').attr('src','');
+
+                $('.backCard').addClass('d-none');
+                $('.frontCard').addClass('d-none');
+            })
+
+            if($('#rechargeSuccessModal')){
+                $('#openRechargeDialog').on('click', function(){
+                    $('#rechargeSuccessModal').modal('show');
+                })
+                $("#closeRechargeModal").on('click', ()=>{
+                    $('#rechargeSuccessModal').modal('hide');
+                })
+            }
+
+            if($('#withdrawSuccessModal')){
+                $('#openWithdrawDialog').on('click', function(){
+                    $('#withdrawSuccessModal').modal('show');
+                })
+                $("#closeWithdrawModal").on('click', ()=>{
+                    $('#withdrawSuccessModal').modal('hide');
+                })
+            }
+
+            if($('#openOTPDialog')){
+                $('#openOTPDialog').on('click', function(){
+                    $('#getOTPModal').modal('show');
+                })
+                $('#closeOTPModal').on('click', ()=>{
+                    $('#getOTPModal').modal('hide');
+                })
+            }
+
+            if($("#openTransferSuccessDialog")){
+                $("#openTransferSuccessDialog").on('click', function(){
+                    $('#transferSuccessModal').modal('show');
+                })
+
+                $('#closeTransferModal').on('click', function(){
+                    $('#transferSuccessModal').modal('hide');
+                })
+            }
+        })
+
+        
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script> -->
+    <script src="js/homepage/script.js"></script>
+    <script src="js/homepage/style-switcher.js"></script>
+    <script src="js/homepage/main.js"></script>
+    <script src="js/homepage/loadingMoney.js"></script>
+    <script src="js/homepage/withdraw.js"></script>
+    <script src="js/homepage/transaction.js"></script>
+    <script src="js/homepage/buyCard.js"></script>
+</body>
+</html>

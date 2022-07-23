@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%
+    let amountObject = {};
+    if(amountAccount){
+      amountObject = amountAccount;
+    }
+
+    
+    let his = [];
+    if(allHis){
+        his = allHis;
+    }
+
+    let ad = {};
+    if(ad){
+        ad = admin;
+    }
+  %>
+  <title>Admin</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/admin/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <!-- Javascript-->
+  <link rel="styleSheet" type="text/javascript" href="./public/javascript.js">
+  
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+</head>
+
+<body onload="time()" class="app sidebar-mini rtl">
+  
+  <!-- Navbar-->
+  <header class="app-header">
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+      <!-- User Menu-->
+      <li style="margin-right: -30px;"><div style="cursor:pointer" class="app-nav__item"><a href="login"><i class='bx bx-log-out bx-rotate-180'></i> </a></div>
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user">
+      <div>
+        <p class="app-sidebar__user-name"><b>Admin</b></p>
+      </div>
+    </div>
+    <hr>
+    <ul class="app-menu">
+      <li><a class="app-menu__item active" href="admin"><i class='app-menu__icon bx bx-tachometer'></i><span
+            class="app-menu__label">Dashboard</span></a></li>
+      <li><a class="app-menu__item" href="accountWaiting"><i class='app-menu__icon bx bx-user-voice'></i><span
+        class="app-menu__label">Account waiting</span></a></li>
+      <li><a class="app-menu__item" href="accountActivated"><i
+        class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">account activated</span></a>
+      </li>
+      <li><a class="app-menu__item" href="accountDisable"><i class='app-menu__icon bx bx-task'></i><span
+            class="app-menu__label">Account disabled</span></a></li>
+      <li><a class="app-menu__item" href="accountDisableInfinite"><i class='app-menu__icon bx bx-run'></i><span
+            class="app-menu__label">Indefinitely disabled 
+          </span></a></li>
+      <li><a class="app-menu__item" href="withdrawRequest"><i class='app-menu__icon bx bx-calendar-check'></i><span
+            class="app-menu__label">Transaction request</span></a></li>
+    </ul>
+  </aside>
+  <main class="app-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="app-title">
+          <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><a href="#"><b>Dashboard</b></a></li>
+          </ul>
+          <div id="clock"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!--Left-->
+      <div class="col-md-12 col-lg-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+              <div class="info">
+                <h4>Total number of accounts</h4>
+                <p><b><%=amountObject.accountTotal%> accounts</b></p>
+                <p class="info-tong">Total number of accounts available.</p>
+              </div>
+            </div>
+          </div>
+        <!-- col-6 -->
+          <div class="col-md-6">
+            <div class="widget-small info coloured-icon"><i class='fas fa-wallet' style='font-size:48px'></i>
+              <div class="info">
+                <h4>Total number of active accounts</h4>
+                <p><b><%=amountObject.accountActive%> Account</b></p>
+                <p class="info-tong">Total number of active accounts managed.</p>
+              </div>
+            </div>
+          </div>
+           <!-- col-6 -->
+          <div class="col-md-6">
+            <div class="widget-small warning coloured-icon"><i class='icon bx bxs-user-account fa-3x' ></i>
+              <div class="info">
+                <h4>Total number of accounts waiting for activation</h4>
+                <p><b><%=amountObject.accountWaitting%> accounts</b></p>
+                <p class="info-tong">Total number of inactive accounts managed.</p>
+              </div>
+            </div>
+          </div>
+           <!-- col-6 -->
+          <div class="col-md-6">
+            <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
+              <div class="info">
+                <h4>Total number of accounts disabled</h4>
+                <p><b><%=amountObject.accountDisabled%> accounts</b></p>
+                <p class="info-tong">The account number is disabled.</p>
+              </div>
+            </div>
+          </div>
+           <!-- col-12 -->
+           <div class="col-md-12">
+            <div class="tile">
+                <h3 class="tile-title">Money approval status</h3>
+              <div>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Customer</th>
+                      <th>Transaction Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    <%
+                      his.forEach((item) => {
+                        let color = '';
+                        if(item.status == 'waiting') {
+                          color='badge bg-info';
+                        }else if(item.status == 'cancelled'){
+                          color='badge bg-danger';
+                        }else{
+                          color='badge bg-warning';
+                        }
+                        %>
+                        <tr>
+                          <td><%= item.ID %></td>
+                          <td><%= item.transactionOwner %></td>
+                          <td>
+                            <%= item.amountInText %>
+                          </td>
+                          <td><span class="<%=color%>"><%= item.status %></span></td>
+                        </tr>
+                        <%
+                      })
+                    %>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- / div trống-->
+            </div>
+           </div>
+            <!-- / col-12 -->
+        </div>
+      </div>
+      <!--END left-->
+    </div>
+    <!-- Script Chức năng -->  
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+    // Hủy    
+      function deleteRow(r) {
+        var i = r.parentNode.parentNode.rowIndex;
+        document.getElementById("myTable").deleteRow(i);
+      }
+      jQuery(function () {
+        jQuery(".trash").click(function () {
+          swal({
+            title: "Cảnh báo",
+           
+            text: "Bạn có chắc chắn là muốn xóa?",
+            buttons: ["Hủy bỏ", "Đồng ý"],
+          })
+            .then((willDelete) => {
+              if (willDelete) {
+                swal("Đã xóa thành công.!", {
+                  
+                });
+              }
+            });
+        });
+      });
+      oTable = $('#sampleTable').dataTable();
+      $('#all').click(function (e) {
+        $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
+        e.stopImmediatePropagation();
+      });
+    //Xác Minh
+    
+    //Bổ sung thông tin 
+    
+    
+    </script>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title> History </title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Main CSS-->
+  <link rel="stylesheet" href="css/homepage/history/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+tbody tr:hover{
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+<%
+  let typeHis = '';
+  if(th){
+    typeHis = th;
+  }
+
+  let history = [
+    {
+      ID: '',
+      transactionOwner: '',
+      transactionFee: '',
+      status: '',
+      message: '',
+      date: ''
+    }
+  ];
+  if(his.length>0){
+    history = his;
+  }
+%>
+<div class="row">
+  <div class="col-md-12">
+      <div class="tile">
+          <div>
+              <h3 class="tile-title"><%= typeHis %></h3>
+               <input type="button" value="Go back!" onclick="history.back()">
+
+          </div>
+          <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+    id="sampleTable">
+    <thead>
+      <tr>
+        <th width="100">ID</th>
+        <th width="300">Transaction Owner</th>
+        <th width="200">Transition fee</th>
+        <th width="300" style="text-align:center">Date</th>
+        <th width="200" style="text-align:center">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+        if(history.length > 0) {
+          history.forEach((item)=>{
+            let color = '';
+            if(item.status == "Success"){
+              color ='badge bg-success';
+            }else{
+              color = 'badge bg-danger';
+            }
+            %>
+            <tr onclick="viewDetails('<%=JSON.stringify(item)%>')">
+              <td><%= item.ID %></td>
+              <td><%= item.transactionOwner %></td>
+              <td><%= item.amountInText %></td>
+              <td style="text-align:center"><%= item.date %></td>
+              <td style="text-align:center"> <spam class="<%= color %>" ><%= item.status %></spam></td>
+            </tr>
+            <%
+          })
+        }
+      %>
+    </tbody>
+  </table>
+      </div>
+  </div>
+</div>
+
+<!-- //modal view -->
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="detailInfs" class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputPassword1">ID</label>
+          <input type="text" class="form-control"  placeholder="" disabled>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Transaction Owner</label>
+          <input type="text" class="form-control"  placeholder="" disabled>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Transaction amount</label>
+          <input type="text" class="form-control" placeholder="" disabled>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Transition fee</label>
+          <input type="text" class="form-control" placeholder="" disabled>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Date</label>
+          <input type="text" class="form-control"  placeholder="" disabled>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Status</label>
+          <input type="text" class="form-control" placeholder="" disabled>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Note</label>
+          <input type="text" class="form-control"  placeholder="" disabled>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Content</label>
+          <div id="Content" style="width:100%,border: 1px solid gray;" >
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="d-none" id="viewModalBtn"></button>
+
+<script>
+    if($('#myModal')){
+      $('#closeModal').on('click',()=>{
+        $('#myModal').modal('hide');
+      })
+      $('#close').on('click',()=>{
+        $('#myModal').modal('hide');
+      })
+
+      $('#viewModalBtn').on('click',()=>{
+        $('#myModal').modal('show');
+      })
+    }
+
+    const viewModalBtn = document.querySelector('#viewModalBtn');
+
+    const viewDetails = (data)=>{
+      viewModalBtn.click();
+      const inputs = document.querySelectorAll('#detailInfs input');
+      
+      data = JSON.parse(data);
+
+      inputs[0].value = data.ID;
+      inputs[1].value = data.transactionOwner;
+      inputs[2].value = data.transactionAmount != '' && data.transactionAmount ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.transactionAmount*1) : "";
+      inputs[3].value = data.transactionFee;
+      inputs[4].value = data.date;
+      inputs[5].value = data.status;
+      inputs[6].value = data.note ? data.note : "";
+      document.querySelector('#Content').innerText = data.message;
+    }
+
+</script>
+
+</body>
+</html>
